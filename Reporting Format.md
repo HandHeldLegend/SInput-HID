@@ -4,6 +4,8 @@ Our input reports also contain command response data if necessary.
 
 ## C Struct Definition
 
+Note that this format is not portable. LSB is indicated here for posterity. Implement at your own discretion.
+
 ```clike
 #pragma pack(push, 1) // Ensure byte alignment
 // Input report (Report ID: 1)
@@ -12,14 +14,12 @@ typedef struct
     uint8_t plug_status;    // Plug Status Format
     uint8_t charge_percent; // 0-100
 
-    union
-    {
-        struct
-        {
-            uint8_t button_south : 1;
-            uint8_t button_east  : 1;
-            uint8_t button_west  : 1;
-            uint8_t button_north : 1;
+    union {
+        struct {
+            uint8_t button_a   : 1; // LSB
+            uint8_t button_b   : 1;
+            uint8_t button_x   : 1;
+            uint8_t button_y   : 1;
             uint8_t dpad_up    : 1;
             uint8_t dpad_down  : 1;
             uint8_t dpad_left  : 1;
@@ -32,7 +32,7 @@ typedef struct
     {
         struct
         {
-            uint8_t button_stick_left : 1;
+            uint8_t button_stick_left : 1; // LSB
             uint8_t button_stick_right : 1;
             uint8_t button_l_shoulder : 1;
             uint8_t button_r_shoulder : 1;
@@ -48,14 +48,14 @@ typedef struct
     {
         struct
         {
-            uint8_t button_start  : 1;
+            uint8_t button_start  : 1; // LSB
             uint8_t button_select : 1;
             uint8_t button_guide  : 1;
             uint8_t button_share  : 1;
-            uint8_t button_power  : 1;
             uint8_t button_l_paddle_2 : 1;
             uint8_t button_r_paddle_2 : 1;
-            uint8_t button_touchpad : 1;
+            uint8_t button_l_touchpad : 1;
+            uint8_t button_r_touchpad : 1;
         };
         uint8_t buttons_3;
     };
@@ -64,7 +64,7 @@ typedef struct
     {
         struct
         {
-            uint8_t button_misc_3  : 1;
+            uint8_t button_power   : 1; // LSB
             uint8_t button_misc_4  : 1;
             uint8_t button_misc_5  : 1;
             uint8_t button_misc_6  : 1;
@@ -93,7 +93,15 @@ typedef struct
     int16_t gyro_y;             // Gyroscope Y
     int16_t gyro_z;             // Gyroscope Z
 
-    uint8_t reserved_bulk[31];  // Reserved for future data
+    int16_t touchpad_1_x;       // Touchpad/trackpad
+    int16_t touchpad_1_y;
+    int16_t touchpad_1_pressure;
+
+    int16_t touchpad_2_x;
+    int16_t touchpad_2_y;
+    int16_t touchpad_2_pressure;
+
+    uint8_t reserved_bulk[19];  // Reserved for command data
 } sinput_input_s;
 #pragma pack(pop)
 ```
@@ -105,7 +113,7 @@ typedef struct
 | 0 | Report ID | uint8 | 0x01 |
 | 1 | Plug Status | uint8 | [Plug Status Format](Plug%20Status%20Format.md)  |
 | 2 | Charge Percent | uint8 | 0-100 |
-| 3-6 | Buttons | uint8\[4\] | Various |
+| 3-6 | Buttons | uint8\[4\] | [Buttons Format](Buttons%20Format.md)  |
 | 7-8 | Left X | int16 | INT 0 is center |
 | 9-10 | Left Y | int16 | INT 0 is center |
 | 11-12 | Right X | int16 | INT 0 is center |
@@ -119,7 +127,13 @@ typedef struct
 | 27-28 | Gyro X (DPS) | int16 | 0 is neutral |
 | 29-30 | Gyro Y | int16 | 0 is neutral |
 | 31-32 | Gyro Z | int16 | 0 is neutral |
-| 33-63 | Reserved |    |    |
+| 33-34 | Touch 1 X | int16 |    |
+| 35-36 | Touch 1 Y  | int16 |    |
+| 37-38 | Touch 1 Pressure | uint16 |    |
+| 39-40 | Touch 2 X  | int16 |    |
+| 41-42 | Touch 2 Y | int16 |    |
+| 43-44 | Touch 2 Pressure | uint16 |    |
+| 45-63 | Reserved |    |    |
 
 
 # Input Report 0x02 (64 bytes)
@@ -131,7 +145,6 @@ Input report 2 contains command response data
 | 0 | 0x03 | REPORT ID |
 | 1 | Various | COMMAND ID |
 | 2-63 | Various | COMMAND DATA |
-
 
 
 # Output Report 0x03 (48 bytes)
@@ -147,10 +160,7 @@ Output report 3 contains 48 bytes and command data.
 ## Command 0x01 - Haptics
 
 
-:::warning
 No acknowledgement is sent to the host for this command
-
-:::
 
 ### C Struct Definition
 
@@ -239,37 +249,36 @@ This is simply an 8 bit amplitude, and a bool brake value
 | 4 | Amplitude Right | uint8 |    |
 | 5 | Brake Right | bool |    |
 
-### 
 
-## Command 0x02 - Feature Flags Request
-
-Send this command to request feature flags for a given device.
+## Command 0x03 - Set Player LEDS
 
 
-:::warning
-The device may not acknowledge this command. Best practice is to have some defaults set, and overwrite those defaults when this command is received.
+No acknowledgement is sent to the host for this command
 
-:::
+
+Send a byte of 0x00 up to 0xFF for player number.
+
+
+## Command 0x02 - Features Request
+
+This command is sent from SDL to retrieve features associated with SDL.
+
+**The device must acknowledge this command to be initialized by SDL.**
+
 
 ### Command Response
 
 | Byte | Data | Meaning |
 |----|----|----|
-| 0 | Various | Feature Flags ( See@[Feature Flags Format](mention://5c755d5d-586f-4733-af4e-58bce4a4c8a9/document/dcab704c-04de-4af9-9019-90c6481436bf) ) |
-| 1 | 0x00 | Reserved |
-| 2 | 0x00-0xFF | Gamepad Sub-Type |
-| 3 | 0x00 | Reserved |
-| 4-5 | 0x00 | API version (unused for now) |
+| 0 | Various | Feature Flags 1 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
+| 1 | Various | Feature Flags 2 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
+| 2 | 0x00-0xFF | SDL Gamepad Type |
+| 3 | 0x00-0xFF | SDL Gamepad SubType |
+| 4-5 | 0x00 | Reserved |
 | 6-7 | Uint16 | Accelerometer G force range |
 | 8-9 | Uint16 | Gyroscope DPS sensitivity range |
+| 10 | Uint8 | Button Usage Count (How many supported buttons) |
+| 11-14 | Uint8 | Button Usage Masks ( See [Buttons Format](Buttons%20Format.md) ) |
+| 15 | Uint8 | Touchpad Count (**Max 2 touchpads**) |
+| 16 | Uint8  | Touchpad Finger Count (**Max 2 fingers TOTAL**) |
 
-
-## Command 0x03 - Set Player LEDS
-
-
-:::warning
-No acknowledgement is sent to the host for this command
-
-:::
-
-Send a byte of 0x00 up to 0xFF for player number.

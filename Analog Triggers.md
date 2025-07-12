@@ -1,3 +1,4 @@
+
 Analog triggers are the primary L and R option on Xbox gamepads and more. Not all gamepads may have analog triggers, so there are a few recommended methods of handling analog triggers listed below.
 
 # Simple Analog Triggers
