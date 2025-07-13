@@ -17,7 +17,7 @@
 | Byte | Bit | Mask | Meaning |
 |----|----|----|----|
 | 1 | 0 | 0x01 | Touchpad Supported |
-| 1 | 1 | 0x02 | Reserved |
+| 1 | 1 | 0x02 | Joystick RGB Supported |
 | 1 | 2 | 0x04 | Reserved |
 | 1 | 3 | 0x08 | Reserved |
 | 1 | 4 | 0x10 | Reserved |

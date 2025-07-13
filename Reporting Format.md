@@ -250,15 +250,6 @@ This is simply an 8 bit amplitude, and a bool brake value
 | 5 | Brake Right | bool |    |
 
 
-## Command 0x03 - Set Player LEDS
-
-
-No acknowledgement is sent to the host for this command
-
-
-Send a byte of 0x00 up to 0xFF for player number.
-
-
 ## Command 0x02 - Features Request
 
 This command is sent from SDL to retrieve features associated with SDL.
@@ -277,8 +268,21 @@ This command is sent from SDL to retrieve features associated with SDL.
 | 4-5 | 0x00 | Reserved |
 | 6-7 | Uint16 | Accelerometer G force range |
 | 8-9 | Uint16 | Gyroscope DPS sensitivity range |
-| 10 | Uint8 | Button Usage Count (How many supported buttons) |
-| 11-14 | Uint8 | Button Usage Masks ( See [Buttons Format](Buttons%20Format.md) ) |
-| 15 | Uint8 | Touchpad Count (**Max 2 touchpads**) |
-| 16 | Uint8  | Touchpad Finger Count (**Max 2 fingers TOTAL**) |
+| 10-13 | Uint8 | Button Usage Masks ( See [Buttons Format](Buttons%20Format.md) ) |
+| 14 | Uint8 | Touchpad Count (**Max 2 touchpads**) |
+| 15 | Uint8  | Touchpad Finger Count (**Max 2 fingers TOTAL**) |
 
+
+
+## Command 0x03 - Set Player LEDS
+
+No acknowledgement is sent to the host for this command
+
+Send a byte of 0x00 up to 0xFF for player number.
+
+
+## Command 0x04 - Set Joystick RGB LED
+
+No acknowledgement is sent to the host for this command
+
+Sends 3 bytes representing a 24 bit RGB value for the gamepad to display whichever way it chooses. Byte order is red, green, blue.
