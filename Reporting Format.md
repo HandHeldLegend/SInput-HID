@@ -265,7 +265,8 @@ This command is sent from SDL to retrieve features associated with SDL.
 | 1 | Various | Feature Flags 2 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
 | 2 | 0x00-0xFF | SDL Gamepad Type |
 | 3 | 0x00-0xFF | SDL Gamepad SubType |
-| 4-5 | 0x00 | Reserved |
+| 4 | 0x00 | Sensor polling rate (milliseconds) |
+| 5 | 0x00 | Reserved |
 | 6-7 | Uint16 | Accelerometer G force range |
 | 8-9 | Uint16 | Gyroscope DPS sensitivity range |
 | 10-13 | Uint8 | Button Usage Masks ( See [Buttons Format](Buttons%20Format.md) ) |
