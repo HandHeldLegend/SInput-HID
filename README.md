@@ -16,8 +16,9 @@ If you have further questions about native SDL implementation or extension, [joi
 | Device | Maker | URL |
 |----|----|----|
 | GC Ultimate | Hand Held Legend, LLC. | [https://gcultimate.com]() |
-| ProGCC | Hand Held Legend, LLC. | <https://handheldlegend.com/products/progcc-kit-wireless-wired-bundle> |
-| Firebird | Bonjiri Channel | <https://booth.pm/ja/items/4934916> |
+| ProGCC | Hand Held Legend, LLC. | [Product Page](https://handheldlegend.com/products/progcc-kit-wireless-wired-bundle) |
+| Super Gamepad+ | Hand Held Legend, LLC. | [Product Page](https://docs.handheldlegend.com/s/portal/doc/super-gamepad-MiOt0KLuX4) |
+| Firebird (Pending) | Bonjiri Channel | [Product Page](https://booth.pm/ja/items/4934916) |
 
 
 ## Features
