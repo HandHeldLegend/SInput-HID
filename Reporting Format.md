@@ -85,15 +85,14 @@ typedef struct
     int16_t right_y;            // Right stick Y
     int16_t trigger_l;          // Left trigger
     int16_t trigger_r;          // Right trigger
-    uint16_t gyro_elapsed_time; // Microseconds, 0 if unchanged
+    
+    uint32_t imu_timestamp;     // IMU Timestamp Microseconds
     int16_t accel_x;            // Accelerometer X
     int16_t accel_y;            // Accelerometer Y
     int16_t accel_z;            // Accelerometer Z
     int16_t gyro_x;             // Gyroscope X
     int16_t gyro_y;             // Gyroscope Y
     int16_t gyro_z;             // Gyroscope Z
-    
-    uint8_t gyro_sample_counter; // Gyro sample counter (Loops)
 
     int16_t touchpad_1_x;       // Touchpad/trackpad
     int16_t touchpad_1_y;
@@ -103,7 +102,7 @@ typedef struct
     int16_t touchpad_2_y;
     int16_t touchpad_2_pressure;
 
-    uint8_t reserved_bulk[18];  // Reserved for command data
+    uint8_t reserved_bulk[17];  // Reserved for command data
 } sinput_input_s;
 #pragma pack(pop)
 ```
@@ -122,21 +121,21 @@ typedef struct
 | 13-14 | Right Y | int16 | INT 0 is center |
 | 15-16 | Trigger L | int16 | INT16_MIN to INT16_MAX |
 | 17-18 | Trigger R | int16 | INT16_MIN to INT16_MAX |
-| 19-20 | Gyro Elapsed Time | uint16 | Microseconds. 0 if unchanged (repeat data) |
-| 21-22 | Accel X (Gs) | int16 | 0 is neutral |
-| 23-24 | Accel Y | int16 | 0 is neutral |
-| 25-26 | Accel Z | int16 | 0 is neutral |
-| 27-28 | Gyro X (DPS) | int16 | 0 is neutral |
-| 29-30 | Gyro Y | int16 | 0 is neutral |
-| 31-32 | Gyro Z | int16 | 0 is neutral |
-| 33 | Gyro Packet Counter | uint8 | 0-255 increments each new packet |
-| 34-35 | Touch 1 X | int16 |    |
-| 36-37 | Touch 1 Y  | int16 |    |
-| 38-39 | Touch 1 Pressure | uint16 |    |
-| 40-41 | Touch 2 X  | int16 |    |
-| 42-43 | Touch 2 Y | int16 |    |
-| 44-45 | Touch 2 Pressure | uint16 |    |
-| 46-63 | Reserved |    |    |
+| 19-22 | IMU Timestamp | uint32 | Microseconds, loops |
+| 23-24 | Accel X (Gs) | int16 | 0 is neutral |
+| 25-26 | Accel Y | int16 | 0 is neutral |
+| 27-28 | Accel Z | int16 | 0 is neutral |
+| 29-30 | Gyro X (DPS) | int16 | 0 is neutral |
+| 31-32 | Gyro Y | int16 | 0 is neutral |
+| 33-34 | Gyro Z | int16 | 0 is neutral |
+| 35-36 | Touch 1 X | int16 |    |
+| 37-38 | Touch 1 Y  | int16 |    |
+| 39-40 | Touch 1 Pressure | uint16 |    |
+| 41-42 | Touch 2 X  | int16 |    |
+| 43-44 | Touch 2 Y | int16 |    |
+| 45-46 | Touch 2 Pressure | uint16 |    |
+| 47-63 | Reserved |    |    |
+
 
 
 # Input Report 0x02 (64 bytes)
