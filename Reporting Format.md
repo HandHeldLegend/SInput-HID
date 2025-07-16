@@ -92,6 +92,8 @@ typedef struct
     int16_t gyro_x;             // Gyroscope X
     int16_t gyro_y;             // Gyroscope Y
     int16_t gyro_z;             // Gyroscope Z
+    
+    uint8_t gyro_sample_counter; // Gyro sample counter (Loops)
 
     int16_t touchpad_1_x;       // Touchpad/trackpad
     int16_t touchpad_1_y;
@@ -101,7 +103,7 @@ typedef struct
     int16_t touchpad_2_y;
     int16_t touchpad_2_pressure;
 
-    uint8_t reserved_bulk[19];  // Reserved for command data
+    uint8_t reserved_bulk[18];  // Reserved for command data
 } sinput_input_s;
 #pragma pack(pop)
 ```
@@ -127,13 +129,14 @@ typedef struct
 | 27-28 | Gyro X (DPS) | int16 | 0 is neutral |
 | 29-30 | Gyro Y | int16 | 0 is neutral |
 | 31-32 | Gyro Z | int16 | 0 is neutral |
-| 33-34 | Touch 1 X | int16 |    |
-| 35-36 | Touch 1 Y  | int16 |    |
-| 37-38 | Touch 1 Pressure | uint16 |    |
-| 39-40 | Touch 2 X  | int16 |    |
-| 41-42 | Touch 2 Y | int16 |    |
-| 43-44 | Touch 2 Pressure | uint16 |    |
-| 45-63 | Reserved |    |    |
+| 33 | Gyro Packet Counter | uint8 | 0-255 increments each new packet |
+| 34-35 | Touch 1 X | int16 |    |
+| 36-37 | Touch 1 Y  | int16 |    |
+| 38-39 | Touch 1 Pressure | uint16 |    |
+| 40-41 | Touch 2 X  | int16 |    |
+| 42-43 | Touch 2 Y | int16 |    |
+| 44-45 | Touch 2 Pressure | uint16 |    |
+| 46-63 | Reserved |    |    |
 
 
 # Input Report 0x02 (64 bytes)
