@@ -1,5 +1,5 @@
 
-This document represents the current developments. 
+See our [Releases](https://github.com/HandHeldLegend/SInput-HID/releases)
 
 # What is SInput?
 
