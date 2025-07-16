@@ -56,7 +56,7 @@ const uint8_t sinput_hid_report_descriptor[139] = {
     // This includes gyro/accel data and counter that apps can use if supported
     0x06, 0x00, 0xFF,              // Usage Page (Vendor Defined)
     
-    // Motion Input Delta (Microseconds, time since last USB report)
+    // Motion Input Timestamp (Microseconds)
     0x09, 0x20,                    //   Usage (Vendor Usage 0x20)
     0x15, 0x00,                    //   Logical Minimum (0)
     0x26, 0xFF, 0xFF,              //   Logical Maximum (655535)
