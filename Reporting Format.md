@@ -258,23 +258,22 @@ This command is sent from SDL to retrieve features associated with SDL.
 
 **The device must acknowledge this command to be initialized by SDL.**
 
-
 ### Command Response
 
 | Byte | Data | Meaning |
 |----|----|----|
-| 0 | Various | Feature Flags 1 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
-| 1 | Various | Feature Flags 2 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
-| 2 | 0x00-0xFF | SDL Gamepad Type |
-| 3 | 0x00-0xFF | SDL Gamepad SubType |
-| 4 | 0x00 | Sensor polling rate (milliseconds) |
-| 5 | 0x00 | Reserved |
-| 6-7 | Uint16 | Accelerometer G force range |
-| 8-9 | Uint16 | Gyroscope DPS sensitivity range |
-| 10-13 | Uint8 | Button Usage Masks ( See [Buttons Format](Buttons%20Format.md) ) |
-| 14 | Uint8 | Touchpad Count (**Max 2 touchpads**) |
-| 15 | Uint8  | Touchpad Finger Count (**Max 2 fingers TOTAL**) |
-
+| 0-1 | Various | Protocol Version |
+| 2 | Various | Feature Flags 1 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
+| 3 | Various | Feature Flags 2 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
+| 4 | 0x00-0xFF | SDL Gamepad Type |
+| 5 | 0x00-0xFF | SDL Gamepad SubType |
+| 6 | Uint8 | Polling rate (Milliseconds) |
+| 7 | Uint8 | Reserved |
+| 8-9 | Uint16 | Accelerometer G force range |
+| 10-11 | Uint16 | Gyroscope DPS sensitivity range |
+| 12-15 | Uint8 | Button Usage Masks ( See [Buttons Format](Buttons%20Format.md) ) |
+| 16 | Uint8 | Touchpad Count (**Max 2 touchpads**) |
+| 17 | Uint8  | Touchpad Finger Count (**Max 2 fingers TOTAL**) |
 
 
 ## Command 0x03 - Set Player LEDS
