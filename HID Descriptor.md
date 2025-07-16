@@ -72,7 +72,7 @@ const uint8_t sinput_hid_report_descriptor[139] = {
     0x95, 0x06,                    //   Report Count (6)
     0x81, 0x02,                    //   Input (Data,Var,Abs)
 
-    // Reserved padding (31 bytes blank for now)
+    // Reserved padding
     0x09, 0x22,                    //   Usage (Vendor Usage 0x22)
     0x15, 0x00,                    //   Logical Minimum (0)
     0x26, 0xFF, 0x00,              //   Logical Maximum (255)
