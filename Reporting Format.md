@@ -274,6 +274,7 @@ This command is sent from SDL to retrieve features associated with SDL.
 | 12-15 | Uint8 | Button Usage Masks ( See [Buttons Format](Buttons%20Format.md) ) |
 | 16 | Uint8 | Touchpad Count (**Max 2 touchpads**) |
 | 17 | Uint8  | Touchpad Finger Count (**Max 2 fingers TOTAL**) |
+| 18-23 | Uint8 | MAC Address or Serial Number |
 
 
 ## Command 0x03 - Set Player LEDS
