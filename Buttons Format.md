@@ -1,10 +1,10 @@
 
 | Button | Bit | Byte | Mask | Button |
 |----|----|----|----|----|
-| 0 | 0 | 0 | 0x01 | South |
-| 1 | 1 | 0 | 0x02 | East |
-| 2 | 2 | 0 | 0x04 | West |
-| 3 | 3 | 0 | 0x08 | North |
+| 0 | 0 | 0 | 0x01 | East |
+| 1 | 1 | 0 | 0x02 | South |
+| 2 | 2 | 0 | 0x04 | North |
+| 3 | 3 | 0 | 0x08 | West |
 | 4 | 4 | 0 | 0x10 | Dpad Up |
 | 5 | 5 | 0 | 0x20 | Dpad Down |
 | 6 | 6 | 0 | 0x40 | Dpad Left |
