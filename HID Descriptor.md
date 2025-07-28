@@ -52,7 +52,7 @@ const uint8_t sinput_hid_report_descriptor[139] = {
     0x95, 0x06,                    //   Report Count (6)
     0x81, 0x02,                    //   Input (Data,Var,Abs)
     
-    // Padding/Reserved data (bytes 20-63) - 44 bytes
+    // Motion data and Reserved data (bytes 20-63) - 44 bytes
     // This includes gyro/accel data and counter that apps can use if supported
     0x06, 0x00, 0xFF,              // Usage Page (Vendor Defined)
     
