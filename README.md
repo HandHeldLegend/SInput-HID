@@ -10,6 +10,9 @@ You may use USB Device ID *0x10C6* along with Vendor ID *0x2E8A* if you wish to 
 
 If you have further questions about native SDL implementation or extension, [join our Discord channel to discuss SInput](https://discord.gg/Rh8cnS7wJA)
 
+## Documentation
+All current [documentation is available on our wiki](https://docs.handheldlegend.com/s/sinput).
+
 
 ## Supported Devices List
 
