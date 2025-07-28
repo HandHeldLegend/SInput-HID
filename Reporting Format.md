@@ -16,10 +16,10 @@ typedef struct
 
     union {
         struct {
-            uint8_t button_a   : 1; // LSB
-            uint8_t button_b   : 1;
-            uint8_t button_x   : 1;
-            uint8_t button_y   : 1;
+            uint8_t button_east   : 1; // LSB
+            uint8_t button_south  : 1;
+            uint8_t button_north  : 1;
+            uint8_t button_west   : 1;
             uint8_t dpad_up    : 1;
             uint8_t dpad_down  : 1;
             uint8_t dpad_left  : 1;
@@ -266,7 +266,7 @@ This command is sent from SDL to retrieve features associated with SDL.
 | 2 | Various | Feature Flags 1 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
 | 3 | Various | Feature Flags 2 ( See [Feature Flags Format](Features%20Response%20Bytes.md) ) |
 | 4 | 0x00-0xFF | SDL Gamepad Type |
-| 5 | 0x00-0xFF | SDL Gamepad SubType |
+| 5 | 0x00-0xFF | SDL Gamepad GUID Metadata |
 | 6 | Uint8 | Polling rate (Milliseconds) |
 | 7 | Uint8 | Reserved |
 | 8-9 | Uint16 | Accelerometer G force range |
