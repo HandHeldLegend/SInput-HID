@@ -18,7 +18,7 @@
 |----|----|----|----|
 | 1 | 0 | 0x01 | Touchpad Supported |
 | 1 | 1 | 0x02 | Joystick RGB Supported |
-| 1 | 2 | 0x04 | Reserved |
+| 1 | 2 | 0x04 | Handheld (1) or Joypad (0) |
 | 1 | 3 | 0x08 | Reserved |
 | 1 | 4 | 0x10 | Reserved |
 | 1 | 5 | 0x20 | Reserved |
